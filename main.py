@@ -3,6 +3,7 @@ import turtle
 import urllib.request 
 import time 
 import webbrowser 
+import geocoder
 
 url = "http://api.open-notify.org/astros.json"
 response = urllib.request.urlopen(url)
@@ -13,7 +14,14 @@ file.write("There are currently" +
 people = result["people"]
 for p in people:
     file.write(p['name']+ " - on board" + "\n")
-# print longitude and latitude
+# if permiited, get user location
+g = geocoder.ip('me')
+
+# Extract user location
+user_location = g.latlng
+
+user_lat, user_lon = user_location
+
 file.close()
 webbrowser.open("iss.txt")
 
@@ -29,6 +37,11 @@ iss = turtle.Turtle()
 iss.shape("iss.gif")
 iss.setheading(45)
 iss.penup()
+
+# Initial user location plot
+user_marker = turtle.Turtle()
+user_marker.dot(10)
+user_marker.goto(user_lon, user_lat)
 
 while True: 
     # Load current status of ISS in real time
@@ -49,6 +62,9 @@ while True:
 
     # Update ISS location on the map
     iss.goto(lon, lat)
+
+    # Update user location on the map
+    user_marker.goto(user_lon, user_lat)
 
     # Refresh
     time.sleep(1)
