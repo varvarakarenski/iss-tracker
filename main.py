@@ -3,7 +3,6 @@ import turtle
 import urllib.request 
 import time 
 import webbrowser 
-import geocoder
 
 url = "http://api.open-notify.org/astros.json"
 response = urllib.request.urlopen(url)
@@ -15,8 +14,6 @@ people = result["people"]
 for p in people:
     file.write(p['name']+ " - on board" + "\n")
 # print longitude and latitude
-g = geocoder.ip('me')
-file.write("\n Your current lat / long is: " + str(g.latlng))
 file.close()
 webbrowser.open("iss.txt")
 
