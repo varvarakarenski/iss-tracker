@@ -1,0 +1,15 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 20pc;
+    background: #122b63;
+    color: white;
+}
+
+h1 {
+    color: #3c66c0;
+}
+
+.info {
+    background: #1d4aaa;
+}

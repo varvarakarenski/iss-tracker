@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ISS Tracker</title>
+        <link rel="icon" type="image/gif" href="iss.gif">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h1>ISS Tracker</h1>
+        <div class="info">
+            <p>ISS Location:</p>
+            <p> Latitude: <span id="lat">Loading...</span></p>
+            <p> Longitude: <span id="lon">Loading...</span></p>
+        </div>
+
+        <script>
+            async function updateISS() {
+                const response = await fetch('/api/iss');
+                const data = await repsonse.json();
+
+                if (data.success) {
+                    document.getElementById('lat').textContext = data.lat.toFixed(4)
+                    document.getElementById('lon').textContent = data.lon.toFixed(4)
+                }
+            }
+
+            window.addEventListener('load', updateISS)
+
+            setinterval(updateISS, 2000)
+        </script>
+
+    </body>
+</html>
