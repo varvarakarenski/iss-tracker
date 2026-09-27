@@ -10,6 +10,11 @@ h1 {
     color: #3c66c0;
 }
 
+#map {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
 .info {
     background: #1d4aaa;
 }
