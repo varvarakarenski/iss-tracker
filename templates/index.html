@@ -6,65 +6,25 @@
         <title>ISS Tracker</title>
         <link rel="icon" type="image/gif" href="/static/img/iss.gif">
         <link rel="stylesheet" href="/static/css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     </head>
 
     <body>
-        <h1>ISS Tracker</h1>
-        <div class="info">
-            <p>ISS Location:</p>
-            <p> Latitude: <span id="lat">Loading...</span></p>
-            <p> Longitude: <span id="lon">Loading...</span></p>
+        <canvas id="stars"></canvas>
+        <div class="content">
+            <center><h1>ISS Tracker</h1></center>
+            <div class="info">
+                <p>ISS Location:</p>
+                <p> Latitude: <span id="lat">Loading...</span></p>
+                <p> Longitude: <span id="lon">Loading...</span></p>
+            </div>
         </div>
-
-        <div id="map" style="height: 500px; width: 100%;">
-
+        <div class="map">
+            
         </div>
-
-        <script>
-            let map;
-            let issMarker;
-            let userMarker;
-
-            function initMap() {
-                map = L.map('map').setView([0, 0], 3);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors',
-                    maxZoom: 19
-                }).addTo(map);
-
-                issMarker = L.circleMarker([0, 0], {color: 'red', radius: 5}).addTo(map);
-                userMarker = L.circleMarker([0, 0], {color: 'blue', radius: 5}).addTo(map);
-            }
-
-            async function updateISS() {
-                const response = await fetch('/api/iss');
-                const data = await response.json();
-
-                if (data.success) {
-                    document.getElementById('lat').textContent = data.lat.toFixed(4)
-                    document.getElementById('lon').textContent = data.lon.toFixed(4)
-                    issMarker.setLatLng([data.lat, data.lon]);
-                }
-            }
-
-            async function updateUserLocation() {
-                const response = await fetch('/api/user-location');
-                const data = await response.json();
-                if (data) {
-                    user.Marker.setLatLng([data.lat, data.lon])
-                }
-            }
-
-            window.addEventListener('load', () => {
-                initMap();
-                updateISS();
-                updateUserLocation();
-            })
-
-            setTnterval(updateISS, 2000)
-        </script>
-
+        <script src="/static/css/script.js"></script>
     </body>
 </html>

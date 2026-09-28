@@ -1,13 +1,35 @@
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Lexend;
     margin: 0;
-    padding: 20pc;
-    background: #122b63;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     color: white;
 }
 
+#stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #061536, #122b63);
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    margin-top: 20vh;
+}
+
 h1 {
-    color: #3c66c0;
+    color: #ffffff;
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
 }
 
 #map {
@@ -16,5 +38,29 @@ h1 {
 }
 
 .info {
-    background: #1d4aaa;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 8px 24px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
