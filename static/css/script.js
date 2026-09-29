@@ -1,3 +1,5 @@
+//star background code
+
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 
@@ -43,3 +45,31 @@ function animate() {
 }
 
 animate();
+
+//map code
+
+async function tracker() {
+    const response = await fetch('/api/iss');
+    const data = await response.json();
+
+    document.getElementById('lat').textContent = data.lat;
+    document.getElementById('lon').textContent = data.lon;
+    issMarker.setLatLng([data.lat, data.lon]);
+}
+
+const map = L.map('map').setView([0, 0], 2);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+var issIcon = L.icon( {
+    iconUrl: '/static/img/iss.gif',
+    iconSize: [20, 20],
+    iconAnchor:  [10, 10],
+});
+
+const issMarker = L.marker([0, 0], {icon: issIcon}).addTo(map);
+
+setInterval(tracker, 2000);
+tracker();

@@ -23,7 +23,7 @@ body {
     z-index: 1;
     color: white;
     text-align: center;
-    margin-top: 20vh;
+    margin-top: 5vh;
 }
 
 h1 {
@@ -35,6 +35,7 @@ h1 {
 #map {
     border: 1px solid #ccc;
     margin: 20px 0;
+    height: 70vh;
 }
 
 .info {
@@ -64,3 +65,4 @@ h1 {
         opacity: 100;
     }
 }
+
