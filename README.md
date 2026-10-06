@@ -72,7 +72,7 @@ The program displays:
     - Internet connection is required for API calls
     - The program runs indefinitely and updates every second
     - Press `Ctrl+C` to stop the tracker
-    - Ensure the `map.gif` and `iss.gif` files are in the same directory as `main.py`
+    - If running locally, ensure the `map.gif` and `iss.gif` files are in the same directory as `main.py`
 
 ## License
 
