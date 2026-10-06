@@ -49,12 +49,12 @@ animate();
 //map code
 
 async function tracker() {
-    const response = await fetch('/api/iss');
+    const response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
     const data = await response.json();
 
-    document.getElementById('lat').textContent = data.lat;
-    document.getElementById('lon').textContent = data.lon;
-    issMarker.setLatLng([data.lat, data.lon]);
+    document.getElementById('lat').textContent = data.latitude;
+    document.getElementById('lon').textContent = data.longitude;
+    issMarker.setLatLng([data.latitude, data.longitude]);
 }
 
 const map = L.map('map').setView([0, 0], 2);
@@ -64,7 +64,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var issIcon = L.icon( {
-    iconUrl: '/static/img/iss.gif',
+    iconUrl: 'static/img/iss.gif',
     iconSize: [20, 20],
     iconAnchor:  [10, 10],
 });

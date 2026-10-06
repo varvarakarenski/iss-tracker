@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify
 import json, urllib.request, geocoder
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 
 @app.route('/')
 def index():
@@ -24,4 +24,4 @@ def get_user_location():
     return jsonify({'lat' : lat, 'lon' : lon})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
