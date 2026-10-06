@@ -87,8 +87,8 @@ async function loadCrew() {
         const card = document.createElement('div');
         card.className = 'astronaut';
         card.innerHTML = `
-            <img src="${person.image}" alt="${person.url}">
-            <strong><p>${person.name}</p></strong>
+            <a href = "${person.url}"><img src="${person.image}" alt="${person.url}"></a>
+            <p><strong>${person.name}</strong></p>
             <p>${person.country}</p>
             <p>${person.position}</p>
         `;
