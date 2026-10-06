@@ -76,3 +76,24 @@ const issMarker = L.marker([0, 0], {icon: issIcon}).addTo(map);
 
 setInterval(tracker, 2000);
 tracker();
+
+async function loadCrew() {
+    const response = await fetch('https://corquaid.github.io/international-space-station-APIs/JSON/people-in-space.json');
+    const data = await response.json();
+
+    const crew = data.people.filter(p => p.iss);
+
+    for (const person of crew) {
+        const card = document.createElement('div');
+        card.className = 'astronaut';
+        card.innerHTML = `
+            <img src="${person.image}" alt="${person.url}">
+            <strong><p>${person.name}</p></strong>
+            <p>${person.country}</p>
+            <p>${person.position}</p>
+        `;
+        document.getElementById('crew').appendChild(card);
+    }
+}
+
+loadCrew();
