@@ -14,7 +14,7 @@ def get_iss():
     result = json.loads(response.read())
     return jsonify({'success': True,
         'lat': float(result["iss_position"]['latitude']),
-        'lon': float(result["iss_position"]['longitude'])
+        'lon': float(result["iss_position"]['longitude']),
     })
 
 @app.route('/api/user-location')

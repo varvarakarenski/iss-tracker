@@ -52,6 +52,9 @@ async function tracker() {
     const response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
     const data = await response.json();
 
+    document.getElementById('vel').textContent = data.velocity.toFixed(1);
+    document.getElementById('alt').textContent = data.altitude.toFixed(1);
+
     document.getElementById('lat').textContent = data.latitude;
     document.getElementById('lon').textContent = data.longitude;
     issMarker.setLatLng([data.latitude, data.longitude]);
