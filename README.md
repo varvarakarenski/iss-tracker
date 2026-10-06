@@ -5,10 +5,12 @@ A real-time International Space Station (ISS) tracker that displays its current 
 ## Features
 - Real-time ISS Tracking: Updates the ISS position every second from the Open-Notify API
 - World Map visualization: Uses Python's 'turtle' graphics to display the ISS location on a world map
-- Astronaut Information: Shows the current number of astronauts on the ISS and lists their names
+- Astronaut Information: Shows the current astronauts on the ISS and lists their names, roles, and home countries
 - Live Updates: Continuously fetches and updates ISS coordinates to track movement across the globe
 
-## Requirements 
+## Local Requirements 
+
+Not sure why you'd like to, but if you're seeking to run this locally, make sure your machine is updated with: 
 
 - Python 3.x
 - 'turtle' - Built-in Python graphics library
@@ -32,7 +34,7 @@ source venv/bin/activate
 ## Usage
 Run the tracker: 
 ```bash
-python main.py
+python app.py
 ```
 
 The program will:
@@ -53,11 +55,18 @@ The tracker uses one API:
 
 ```
 iss-tracker/
-├── main.py          # Main tracking script
-├── map.gif          # World map background image
-├── iss.gif          # ISS sprite/icon
-├── README.md        # This file
-└── .gitignore       # Git ignore patterns
+├── index.html           # Web app page (served by GitHub Pages)
+├── app.py               # Flask server for running the web app locally
+├── main.py              # Original turtle-graphics tracker
+├── static/
+│   ├── css/
+│   │   ├── style.css    # Page styling
+│   │   └── script.js    # Map, live ISS position, crew cards
+│   └── img/
+│       ├── iss.gif      # ISS sprite/icon
+│       └── map.gif      # World map background (turtle version)
+├── README.md            # This file
+└── .gitignore           # Git ignore patterns
 ```
 
 ## Output
@@ -72,7 +81,7 @@ The program displays:
     - Internet connection is required for API calls
     - The program runs indefinitely and updates every second
     - Press `Ctrl+C` to stop the tracker
-    - If running locally, ensure the `map.gif` and `iss.gif` files are in the same directory as `main.py`
+    - If running locally, ensure the `map.gif` and `iss.gif` files are in the same directory as `app.py`
 
 ## License
 
