@@ -1,26 +1,23 @@
 # ISS Tracker 
 
-A real-time International Space Station (ISS) tracker that displays its current location on a world map. 
+A real-time International Space Station (ISS) tracker that displays its current location on an interactive world map, along with its past and predicted path. 
 
 ## Features
-- Real-time ISS Tracking: Updates the ISS position every second from the Open-Notify API
-- World Map visualization: Uses Python's 'turtle' graphics to display the ISS location on a world map
-- Astronaut Information: Shows the current astronauts on the ISS and lists their names, roles, and home countries
-- Live Updates: Continuously fetches and updates ISS coordinates to track movement across the globe
+- **Real-time ISS Tracking:** Updates the ISS position every 2 seconds on an interactive Leaflet map
+- **Future and Past Trajectory:** Shows where the ISS has been over the last 90 minutes (dashed gray line) and where it's headed over the next 90 minutes (orange line), with a key in the corner of the map
+- **Live Stats:** Latitude, longitude, altitude, and velocity
+- **Current Crew:** Cards for each astronaut currently aboard the ISS, with photo, name, country, and role (photos link to their Wikipedia pages)
+- **Fun Facts:** A few things you might not know about the ISS
 
-## Local Requirements 
+## Running Locally
 
-Not sure why you'd like to, but if you're seeking to run this locally, make sure your machine is updated with: 
+The site is a single static page, so you can just open `index.html` in a browser. 
 
-- Python 3.x
-- 'turtle' - Built-in Python graphics library
-
-## Installation
+To serve it with Flask instead:
 
 1. Clone the repository
 ```bash
-git clone
-https https://github.com/varvarakarenski iss-tracker.git
+git clone https://github.com/varvarakarenski/iss-tracker.git
 cd iss-tracker
 ```
 
@@ -28,28 +25,28 @@ cd iss-tracker
 ```bash
 python -m venv venv
 source venv/bin/activate 
-# On Windows: venv/Scripts/activate
+# On Windows: venv\Scripts\activate
 ```
 
-## Usage
-Run the tracker: 
+3. Install dependencies and run:
 ```bash
+pip install flask geocoder
 python app.py
 ```
 
-The program will:
-1. Fetch current ISS astronaut data and save it to iss.txt
-2. Open the 'iss.txt' file in your default text editor
-3. Display an interactive world map with the ISS's current position
-4. Update the ISS location every second in real-time
+Then open http://localhost:5001.
 
 ## How it Works
 
-The tracker uses one API:
+The page fetches everything directly from the browser using these APIs:
 
-1. **Open-Notify API** ('http://api.open-notify.org/')
-    - '/astros.json' - Gets current astronauts on the ISS
-    - '/iss-now.json' - Gets real time ISS coordinates
+1. **Where the ISS at? API** (`https://api.wheretheiss.at/`)
+    - `/v1/satellites/25544` - Current ISS position, altitude, and velocity
+    - `/v1/satellites/25544/positions?timestamps=...` - ISS positions at past/future times, used to draw the trajectory (max 10 timestamps per request)
+2. **People in Space API** (`https://corquaid.github.io/international-space-station-APIs/`)
+    - `/JSON/people-in-space.json` - Current crew and their details
+
+The map uses [Leaflet](https://leafletjs.com/) with [OpenStreetMap](https://www.openstreetmap.org/) tiles. 
 
 ## Project Structure
 
@@ -61,7 +58,7 @@ iss-tracker/
 ├── static/
 │   ├── css/
 │   │   ├── style.css    # Page styling
-│   │   └── script.js    # Map, live ISS position, crew cards
+│   │   └── script.js    # Map, live ISS position, trajectory, crew cards
 │   └── img/
 │       ├── iss.gif      # ISS sprite/icon
 │       └── map.gif      # World map background (turtle version)
@@ -69,19 +66,16 @@ iss-tracker/
 └── .gitignore           # Git ignore patterns
 ```
 
-## Output
+## Original Turtle Version
 
-The program displays:
-    - Console Output: Real-time latitude and longitude updates
-    - iss.txt File: Text file with astronaut names
-    - Map Display: Visual representation of ISS position on a world map
+`main.py` is the original version of this project, built with Python's `turtle` graphics and the [Open-Notify API](http://open-notify.org/). It writes the current astronauts to `iss.txt` and draws the ISS moving across a world map. To run it:
 
-## Notes
+```bash
+pip install geocoder
+python main.py
+```
 
-    - Internet connection is required for API calls
-    - The program runs indefinitely and updates every second
-    - Press `Ctrl+C` to stop the tracker
-    - If running locally, ensure the `map.gif` and `iss.gif` files are in the same directory as `app.py`
+Press `Ctrl+C` to stop it.
 
 ## License
 
@@ -89,5 +83,7 @@ This project is open source and available under the MIT License.
 
 ## Acknowledgments
 
-    - Data provided by [Open-Notify](http://open-notify.org/)
-    - Inspired by tutorial by BekBrace: [YouTube](https://youtu.be/5UWeOfdESZE?si=u3H_jDMhvCx6hmjv)
+- ISS position data from [Where the ISS at?](https://wheretheiss.at/)
+- Crew data from [corquaid's ISS APIs](https://github.com/corquaid/international-space-station-APIs)
+- Original turtle version data from [Open-Notify](http://open-notify.org/)
+- Inspired by tutorial by BekBrace: [YouTube](https://youtu.be/5UWeOfdESZE?si=u3H_jDMhvCx6hmjv)
